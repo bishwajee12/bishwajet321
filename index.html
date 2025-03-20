@@ -64,11 +64,11 @@
             const originalBorder = puzzle.style.border;
 
             puzzle.addEventListener("mouseenter", function () {
-                puzzle.style.border = "5px solid red"; // Highlight border
+                puzzle.style.border = "5px solid red"; 
             });
 
             puzzle.addEventListener("mouseleave", function () {
-                puzzle.style.border = originalBorder; // Restore original border
+                puzzle.style.border = originalBorder; 
             });
 
             let buttons = [];
@@ -79,8 +79,8 @@
                 button.classList.add("large-button");
                 button.style.left = `${left}px`;
                 button.style.top = `${top}px`;
-                button.style.width = "125px"; // Set width to 125px
-                button.style.height = "125px"; // Set height to 125px
+                button.style.width = "125px"; 
+                button.style.height = "125px"; 
                 button.style.backgroundColor = color;
                 puzzle.appendChild(button);
             }
@@ -98,7 +98,7 @@
             for (let i = 0; i < 100; i++) {
                 let box = document.createElement("div");
                 box.classList.add("puzzle-button");
-                box.dataset.index = i; // Store index for reference
+                box.dataset.index = i; 
                 buttonContainer.appendChild(box);
                 buttons.push(box);
             }
@@ -110,16 +110,16 @@
 
                 let index = parseInt(clickedButton.dataset.index);
 
-                clickedButton.style.backgroundColor = "#4A2574"; // Dark Purple
+                clickedButton.style.backgroundColor = "#4A2574"; 
 
                 
                 if (index > 0) {
-                    buttons[index - 1].style.backgroundColor = "#FF9E00"; // Orange
+                    buttons[index - 1].style.backgroundColor = "#FF9E00"; 
                 }
 
             
                 if (index < buttons.length - 1) {
-                    buttons[index + 1].style.backgroundColor = "#FF9E00"; // Orange
+                    buttons[index + 1].style.backgroundColor = "#FF9E00"; 
                 }
             });
         });
