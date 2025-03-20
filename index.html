@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM Puzzle</title>
+    <style>
+        /* NOTE: DO NOT modify this stylesheet */
+        #puzzle {
+            width: 500px;
+            height: 500px;
+            border: 5px solid black;
+            position: relative;
+            background-color: #7338A0;
+            display: grid;
+            grid-template-rows: 250px 250px;
+            grid-template-columns: 250px 250px;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            width: 250px;
+            height: 250px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .puzzle-button {
+            width: 100%;
+            height: 100%;
+            background-color: #639CFE;
+            border: 1px solid white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .large-button {
+            width: 125px;
+            height: 125px;
+            font-size: 20px;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DOM Puzzle</h1>
+    <p>This is a puzzle created entirely with JavaScript.</p>
+    <div id="puzzle"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const puzzle = document.getElementById("puzzle");
+
+        
+            const originalBorder = puzzle.style.border;
+
+            puzzle.addEventListener("mouseenter", function () {
+                puzzle.style.border = "5px solid red"; // Highlight border
+            });
+
+            puzzle.addEventListener("mouseleave", function () {
+                puzzle.style.border = originalBorder; // Restore original border
+            });
+
+            let buttons = [];
+
+            function createLargeButton(text, left, top, color) {
+                let button = document.createElement("button");
+                button.innerText = text;
+                button.classList.add("large-button");
+                button.style.left = `${left}px`;
+                button.style.top = `${top}px`;
+                button.style.width = "125px"; // Set width to 125px
+                button.style.height = "125px"; // Set height to 125px
+                button.style.backgroundColor = color;
+                puzzle.appendChild(button);
+            }
+
+            createLargeButton("A", 0, 0, "#9455F4");
+            createLargeButton("B", 125, 0, "#4A2B74");
+            createLargeButton("C", 0, 125, "#594492");
+            createLargeButton("D", 125, 125, "#854DDC");
+
+    
+            let buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-container");
+            puzzle.appendChild(buttonContainer);
+
+            for (let i = 0; i < 100; i++) {
+                let box = document.createElement("div");
+                box.classList.add("puzzle-button");
+                box.dataset.index = i; // Store index for reference
+                buttonContainer.appendChild(box);
+                buttons.push(box);
+            }
+
+            
+            buttonContainer.addEventListener("click", function (event) {
+                let clickedButton = event.target;
+                if (!clickedButton.classList.contains("puzzle-button")) return;
+
+                let index = parseInt(clickedButton.dataset.index);
+
+                clickedButton.style.backgroundColor = "#4A2574"; // Dark Purple
+
+                
+                if (index > 0) {
+                    buttons[index - 1].style.backgroundColor = "#FF9E00"; // Orange
+                }
+
+            
+                if (index < buttons.length - 1) {
+                    buttons[index + 1].style.backgroundColor = "#FF9E00"; // Orange
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
